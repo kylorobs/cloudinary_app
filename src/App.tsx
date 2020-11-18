@@ -13,7 +13,9 @@ const  App: React.FC = () => {
       console.log(image)
     
     })
-    .catch(er => console.log('We have an error: ' + er))
+    .catch(er =>{
+      throw new Error(er)
+    })
   }
 
   return (
