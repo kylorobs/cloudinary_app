@@ -21,7 +21,7 @@ const  App: React.FC = () => {
   return (
     <form onSubmit={e => uploadListener(e)} encType="multipart/form-data"  method="post">
         <input 
-          style={{"margin": "2em"}} 
+          style={{"margin": "3em"}} 
           name="file_upload" 
           id="upload" 
           type="file"
