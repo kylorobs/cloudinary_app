@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {SyntheticEvent} from 'react';
 import './App.css';
 
-function App() {
+const  App: React.FC = () => {
+
+  const uploadListener = (e: SyntheticEvent<HTMLFormElement>) : void => {
+    e.preventDefault();
+    console.log(e)
+    fetch("http://localhost:4000/upload", {method: 'POST', body: new FormData((e.target as any))})
+    .then(res => res.json())
+    .then(result => {
+      const image = result;
+      console.log(image)
+    
+    })
+    .catch(er => console.log('We have an error: ' + er))
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <form onSubmit={e => uploadListener(e)} encType="multipart/form-data"  method="post">
+        <input 
+          style={{"margin": "2em"}} 
+          name="file_upload" 
+          id="upload" 
+          type="file"
+        />
+        <input type="submit" />
+    </form> as any
   );
 }
 
